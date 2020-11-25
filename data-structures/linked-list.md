@@ -163,14 +163,14 @@ head              prev
                            └───┴─┘
 ```
 
-그런데 위의 1번 순서가 앞서 구현한 노드 탐색과 중복된다. 먼저 노드를 찾는 부분을 메서드로 추출한다.
+그런데 위의 1번 순서가 앞서 구현한 노드 탐색과 중복된다. 먼저 노드를 찾는 부분을 private 메서드로 추출한다. `index`가 `0`이 들어왔을 때 삽입 위치 직전 노드의 인덱스는 `-1`이 되므로, `getNode(-1)`을 호출하면 `this.head`를 리턴하도록 구현한다. 기존 `getValue` 메서드에서는 head의 값을 돌려주지 않도록 이전과 동일하게 범위를 제한한다.
 
 ```typescript
 class LinkedList<T> {
   // ...
 
   private getNode(index: number): LinkedListNode<T> {
-    if (index < 0) {
+    if (index < -1) {
       throw RangeError();
     }
 
@@ -185,6 +185,9 @@ class LinkedList<T> {
   }
 
   getValue(index: number): T {
+    if (index < 0) {
+      throw RangeError();
+    }
     return this.getNode(index).value;
   }
 }
@@ -238,11 +241,16 @@ head                       target
 └───┴─┘  └───┴─┘  └───┴─┘  └───┴─┘  └───┴─┘  ╵
 ```
 
+여기서도 앞의 `getValue` 메서드와 같이 head의 값을 돌려주지 않도록 범위를 제한한다.
+
 ```typescript
 class LinkedList<T> {
   // ...
 
   update(index: number, value: T): void {
+    if (index < 0) {
+      throw RangeError();
+    }
     this.getNode(index).value = value;
   }
 }
@@ -325,7 +333,7 @@ class LinkedList<T> {
   }
 
   private getNode(index: number): LinkedListNode<T> {
-    if (index < 0) {
+    if (index < -1) {
       throw RangeError();
     }
 
@@ -340,6 +348,9 @@ class LinkedList<T> {
   }
 
   getValue(index: number): T {
+    if (index < 0) {
+      throw RangeError();
+    }
     return this.getNode(index).value;
   }
 
@@ -353,6 +364,9 @@ class LinkedList<T> {
   }
 
   update(index: number, value: T): void {
+    if (index < 0) {
+      throw RangeError();
+    }
     this.getNode(index).value = value;
   }
 
