@@ -54,8 +54,8 @@ Linked list는 다음과 같은 동작을 수행한다.
 
 ```typescript
 interface LinkedListNode<T> {
-  value: T | null,
-  next: LinkedListNode<T> | null,
+  value: T | null;
+  next: LinkedListNode<T> | null;
 }
 
 class LinkedList<T> {
@@ -318,8 +318,8 @@ class LinkedList<T> {
 
 ```typescript
 interface LinkedListNode<T> {
-  value: T | null,
-  next: LinkedListNode<T> | null,
+  value: T | null;
+  next: LinkedListNode<T> | null;
 }
 
 class LinkedList<T> {
