@@ -10,7 +10,7 @@
 
 -----
 
-## 배열과 스택 포인터를 이용한 스택
+## 배열과 스택 포인터(`top`)를 이용한 스택
 
 ### 배열을 이용한 스택의 설계
 
@@ -25,7 +25,7 @@
 
 그리고 각 선택지마다 `push`, `pop` 동작을 수행할 때 `top`의 값을 더하고 빼는 순서가 달라진다. 이런 디테일은 직접 구현하다 보면 금방 알고 적용할 수 있을 것이다.
 
-기본적인 구조는 TypeScript로 다음과 같이 표현할 수 있다. TypeScript에서는 배열 자체를 그대로 스택처럼 활용할 수 있지만, 여기서는 레거시 형태로 직접 구현하기로 한다.
+기본적인 구조는 TypeScript로 다음과 같이 표현할 수 있다. TypeScript에서는 배열 자체를 그대로 스택처럼 활용할 수 있지만, 여기서는 레거시 형태로 직접 구현하기로 한다. (C나 Java의 배열로 구현하듯이 구현한다.)
 
 ```typescript
 class Stack<T> {
@@ -148,6 +148,98 @@ class Stack<T> {
 
     this.top -= 1;
     return this.contents[this.top];
+  }
+}
+```
+
+-----
+
+## Linked List를 이용한 스택
+
+### Linked List를 이용한 스택의 설계
+
+배열을 이용한 스택에서는 배열의 끝 부분에서 `push`, `pop` 동작이 이루어졌다. Linked list에서는 시간 복잡도를 줄이기 위해 리스트의 시작 부분에서 `push`, `pop` 동작을 수행한다.
+
+### Linked List를 이용한 스택의 초기화
+
+Linked list를 초기화한다.
+
+```typescript
+class Stack<T> {
+  private list: LinkedList<T>;
+
+  constructor() {
+    this.list = new LinkedList();
+  }
+}
+```
+
+### Linked List를 이용한 스택의 `isEmpty` 메서드
+
+`isEmpty` 메서드는 리스트의 내용이 비었는지 검사하여 boolean 값을 반환한다. 여기서는 용량이 무한한 스택을 구현하므로 `isFull` 메서드는 필요하지 않다.
+
+```typescript
+class Stack<T> {
+  // ...
+
+  isEmpty(): boolean {
+    return this.list.isEmpty();
+  }
+}
+```
+
+### Linked List를 이용한 스택의 `push` 메서드
+
+주어진 값을 가진 노드를 리스트의 맨 앞에 추가한다.
+
+```typescript
+class Stack<T> {
+  // ...
+
+  push(value: T): void {
+    this.list.insert(0, value);
+  }
+}
+```
+
+### Linked List를 이용한 스택의 `pop` 메서드
+
+리스트의 맨 앞 노드의 값을 가져오고, 그 노드를 삭제한 뒤, 가져온 값을 반환한다.
+
+```typescript
+class Stack<T> {
+  // ...
+
+  pop(): T {
+    const value: T = this.list.getValue(0);
+    this.list.remove(0);
+    return value;
+  }
+}
+```
+
+### Linked List를 이용한 스택 전체 코드
+
+```typescript
+class Stack<T> {
+  private list: LinkedList<T>;
+
+  constructor() {
+    this.list = new LinkedList();
+  }
+
+  isEmpty(): boolean {
+    return this.list.isEmpty();
+  }
+
+  push(value: T): void {
+    this.list.insert(0, value);
+  }
+
+  pop(): T {
+    const value: T = this.list.getValue(0);
+    this.list.remove(0);
+    return value;
   }
 }
 ```
