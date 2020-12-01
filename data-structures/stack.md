@@ -1,6 +1,6 @@
 # 스택
 
-나중에 추가된 데이터를 먼저 내보내는(LIFO: Last In First Out) 자료구조. Stack은 다음과 같은 동작을 수행한다.
+나중에 추가된 데이터를 먼저 내보내는(LIFO: Last In First Out) 자료구조. 스택은 다음과 같은 동작을 수행한다.
 
 - 초기화
 - Push: 값 추가
@@ -218,7 +218,7 @@ class Stack<T> {
 }
 ```
 
-### Linked List를 이용한 스택 전체 코드
+### Linked List를 이용한 스택의 전체 코드
 
 ```typescript
 class Stack<T> {
