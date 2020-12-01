@@ -391,5 +391,9 @@ class LinkedList<T> {
     const targetNode: LinkedListNode<T> = prevNode.next;
     prevNode.next = targetNode.next;
   }
+
+  isEmpty(): boolean {
+    return this.head.next === null;
+  }
 }
 ```
