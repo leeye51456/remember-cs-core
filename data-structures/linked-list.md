@@ -314,6 +314,22 @@ class LinkedList<T> {
 
 -----
 
+## (선택) 리스트가 비었는지 확인하는 메서드 구현
+
+이 메서드는 스택이나 큐 등을 linked list로 구현할 때, 리스트가 비었는지 바로 확인하기 위한 용도이다.
+
+```typescript
+class LinkedList<T> {
+  // ...
+
+  isEmpty(): boolean {
+    return this.head.next === null;
+  }
+}
+```
+
+-----
+
 ## 구현한 전체 코드
 
 ```typescript
